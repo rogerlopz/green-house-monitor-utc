@@ -1,23 +1,40 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import DashboardView from '../views/DashboardView.vue'
 
-const router = createRouter({
+const index = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'dashboard',
+      component: DashboardView
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/luminosity/:sensorId',
+      name: 'luminosity',
+      component: () => import('../views/LuminosityView.vue')
+    },
+    {
+      path: '/barometric-pressure/:sensorId',
+      name: 'barometric-pressure',
+      component: () => import('../views/BarometricPressureView.vue')
+    },
+    {
+      path: '/co2-levels/:sensorId',
+      name: 'co2-levels',
+      component: () => import('../views/CO2LevelsVIew.vue')
+    },
+    {
+      path: '/soil-temperature/:sensorId',
+      name: 'soil-temperature',
+      component: () => import('../views/BarometricPressureView.vue')
+    },
+    {
+      path: '/soil-moisture/:sensorId',
+      name: 'soil-moisture',
+      component: () => import('../views/BarometricPressureView.vue')
     }
   ]
 })
 
-export default router
+export default index
