@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import {
-  ArchiveBoxIcon,
-  ArrowRightCircleIcon,
-  ChevronDownIcon,
-  DocumentDuplicateIcon,
-  HeartIcon,
-  PencilSquareIcon,
-  TrashIcon,
-  UserPlusIcon
-} from '@heroicons/vue/20/solid'
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
-defineProps({ label: { type: String, default: 'Options' } })
+defineProps({
+  label: { type: String, default: 'Options' },
+  list: { type: Array, default: () => [] }
+})
 </script>
 
 <template>
@@ -26,6 +20,7 @@ defineProps({ label: { type: String, default: 'Options' } })
     </div>
 
     <transition
+      v-if="list.length > 0"
       enter-active-class="transition ease-out duration-100"
       enter-from-class="transform opacity-0 scale-95"
       enter-to-class="transform opacity-100 scale-100"
@@ -37,7 +32,7 @@ defineProps({ label: { type: String, default: 'Options' } })
         class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
         <div class="py-1">
-          <MenuItem v-slot="{ active }">
+          <MenuItem v-for="listItem in list" :key="listItem.id" v-slot="{ active }">
             <a
               href="#"
               :class="[
@@ -45,107 +40,11 @@ defineProps({ label: { type: String, default: 'Options' } })
                 'group flex items-center px-4 py-2 text-sm'
               ]"
             >
-              <PencilSquareIcon
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-              Edit
-            </a>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'group flex items-center px-4 py-2 text-sm'
-              ]"
-            >
-              <DocumentDuplicateIcon
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-              Duplicate
-            </a>
-          </MenuItem>
-        </div>
-        <div class="py-1">
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'group flex items-center px-4 py-2 text-sm'
-              ]"
-            >
-              <ArchiveBoxIcon
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-              Archive
-            </a>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'group flex items-center px-4 py-2 text-sm'
-              ]"
-            >
-              <ArrowRightCircleIcon
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-              Move
-            </a>
-          </MenuItem>
-        </div>
-        <div class="py-1">
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'group flex items-center px-4 py-2 text-sm'
-              ]"
-            >
-              <UserPlusIcon
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-              Share
-            </a>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'group flex items-center px-4 py-2 text-sm'
-              ]"
-            >
-              <HeartIcon
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-              Add to favorites
-            </a>
-          </MenuItem>
-        </div>
-        <div class="py-1">
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'group flex items-center px-4 py-2 text-sm'
-              ]"
-            >
-              <TrashIcon
-                class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-              Delete
+              <!--<PencilSquareIcon-->
+              <!--class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"-->
+              <!--aria-hidden="true"-->
+              <!--/>-->
+              {{ listItem.name }}
             </a>
           </MenuItem>
         </div>

@@ -1,6 +1,4 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { state } from 'vue-tsc/out/shared'
 
 export interface Channel {
   created_at: string
@@ -57,6 +55,7 @@ export const useChannelFeedsStore = defineStore('ChannelFeeds', {
             if (feed.field4) {
               this.field4Feed.push(feed?.field4)
             }
+
             if (feed.field5) {
               this.field5Feed.push(feed?.field5)
             }
@@ -72,5 +71,6 @@ export const useChannelFeedsStore = defineStore('ChannelFeeds', {
         this.isError = true
       }
     }
-  }
+  },
+  persist: true
 })

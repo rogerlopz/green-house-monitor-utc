@@ -11,7 +11,7 @@ import {
   SunIcon,
   XMarkIcon
 } from '@heroicons/vue/24/outline'
-import DropdownWithIcons from '@/components/dropdowns/DropdownWithIcons.vue'
+import CropListSelect from '@/components/CropListSelect.vue'
 
 const navigation = [
   { name: 'Dashboard', namedRoute: 'dashboard', icon: RectangleGroupIcon, current: true },
@@ -86,7 +86,7 @@ const sidebarOpen = ref(false)
                       <router-link
                         :to="{ name: item.namedRoute, params: { sensorId: index } }"
                         :class="[
-                          item.current
+                          $route.name === item.namedRoute
                             ? 'bg-primary-500 text-white'
                             : 'text-gray-400 hover:text-white hover:bg-gray-800',
                           'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -117,13 +117,14 @@ const sidebarOpen = ref(false)
             <router-link
               :to="{ name: item.namedRoute, params: { sensorId: index } }"
               :class="[
-                item.current
+                $route.name === item.namedRoute
                   ? 'bg-primary-500 text-white'
                   : 'text-primary-400 hover:text-white hover:bg-primary-500',
                 'group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold'
               ]"
             >
               <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+
               <span class="sr-only">{{ item.name }}</span>
             </router-link>
           </li>
@@ -146,7 +147,8 @@ const sidebarOpen = ref(false)
 
         <div class="flex items-center">
           <p class="mr-2">Select crop type:</p>
-          <DropdownWithIcons label="Crops" />
+
+          <CropListSelect />
         </div>
       </div>
 
